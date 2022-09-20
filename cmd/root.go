@@ -15,6 +15,9 @@ var rootCmd = &cobra.Command{
 	Use:   "gopic",
 	Short: "A brief description of your application",
 	Long:  `gopic is an opensource picPool tool`,
+	CompletionOptions: cobra.CompletionOptions{
+		DisableDefaultCmd: true,
+	},
 }
 
 func Execute() {
@@ -26,4 +29,10 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	// hide the help command.
+	rootCmd.SetHelpCommand(&cobra.Command{
+		Use:    "no-help",
+		Hidden: true,
+	})
 }
