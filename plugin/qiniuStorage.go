@@ -6,6 +6,7 @@ import (
 
 	"github.com/OSTGO/gopic/pkg/conf"
 	"github.com/OSTGO/gopic/pkg/utils"
+	"github.com/lithammer/dedent"
 	"github.com/qiniu/go-sdk/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/storage"
 )
@@ -73,5 +74,12 @@ func init() {
 }
 
 func qiniuHelp() string {
-	return "accessKey,secretKey,bucket,responseURL"
+	return dedent.Dedent(`
+    qiniu plugin need this parameters:
+    active:      false or true
+    accessKey:   your access key
+    secretKey:   your secret key
+    bucket:      your bucket
+    responseURL: like "https://pic.longtao.fun/pics/"
+	`)
 }

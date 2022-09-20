@@ -8,6 +8,7 @@ import (
 
 	"github.com/OSTGO/gopic/pkg/conf"
 	"github.com/OSTGO/gopic/pkg/utils"
+	"github.com/lithammer/dedent"
 )
 
 type GithubStorage struct {
@@ -67,5 +68,11 @@ func init() {
 }
 
 func githubHelp() string {
-	return "github plugin need this parameters:\nactive: false or true\nresponseURL: like https://gcore.jsdelivr.net/gh/yourUserName/pics@main/\nrequestURL: like https://api.github.com/repos/yourUserName/pics/contents/\ntoke: your github token"
+	return dedent.Dedent(`
+    github plugin need this parameters:
+    active:      false or true
+    responseURL: like https://gcore.jsdelivr.net/gh/yourUserName/pics@main/
+    requestURL:  like https://api.github.com/repos/yourUserName/pics/contents/
+    toke:        your github token
+	`)
 }

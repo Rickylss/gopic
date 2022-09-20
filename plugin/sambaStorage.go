@@ -8,6 +8,7 @@ import (
 	"github.com/OSTGO/gopic/pkg/conf"
 	"github.com/OSTGO/gopic/pkg/utils"
 	"github.com/hirochachacha/go-smb2"
+	"github.com/lithammer/dedent"
 )
 
 type SambaStorage struct {
@@ -114,5 +115,14 @@ func init() {
 }
 
 func sambaHelp() string {
-	return "samba plugin need this parameters:\nactive: false or true\nresponseURL: like \"http://192.168.200.100/mirror/\nuser: like smb\npassword: like password\nshare: like share\ndir: like my/test\naddress: like 192.168.200.100:445"
+	return dedent.Dedent(`
+	samba plugin need this parameters:
+	active:      false or true
+	responseURL: like \"http://192.168.200.100/mirror/
+	user:        like smb
+	password:    like password
+	share:       like share
+	dir:         like my/test
+	address:     like 192.168.200.100:445
+	`)
 }

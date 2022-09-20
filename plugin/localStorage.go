@@ -6,6 +6,7 @@ import (
 
 	"github.com/OSTGO/gopic/pkg/conf"
 	"github.com/OSTGO/gopic/pkg/utils"
+	"github.com/lithammer/dedent"
 )
 
 type LocalStorage struct {
@@ -55,5 +56,9 @@ func init() {
 }
 
 func localHelp() string {
-	return "local plugin used for test"
+	return dedent.Dedent(`
+    local plugin need this parameters:
+    active: false or true
+    path:   like /home/ubuntu/gopic-test/
+	`)
 }

@@ -9,22 +9,28 @@ import (
 	"golang.org/x/exp/maps"
 )
 
-func CmdConf() string {
-	return showConfigAndPath() + "\n" + showAllPluginList() + "\n" + showActivePluginList() + "\n" + showEveryPluginHelp()
+func CmdConf() {
+	showConfigAndPath()
+	showAllPluginList()
+	showActivePluginList()
+	showEveryPluginHelp()
 }
 
-func showAllPluginList() string {
-	return fmt.Sprintln("Supported Plugins:", maps.Keys(utils.StroageHelp))
+func showAllPluginList() {
+	fmt.Println("Supported Plugins: ", maps.Keys(utils.StroageHelp))
 }
 
-func showActivePluginList() string {
-	return fmt.Sprintln("Actived Plugins: ", maps.Keys(utils.StroageMap))
+func showActivePluginList() {
+	fmt.Println("Actived Plugins: ", maps.Keys(utils.StroageMap))
 }
 
-func showEveryPluginHelp() string {
-	return fmt.Sprintln(utils.StroageHelp)
+func showEveryPluginHelp() {
+	for k, v := range utils.StroageHelp {
+		fmt.Printf("%s:%s\n", k, v)
+	}
 }
 
-func showConfigAndPath() string {
-	return "Config Path:" + constant.DEFAULT_CONF_P + "Config Content:" + fmt.Sprintln(conf.Viper.AllSettings())
+func showConfigAndPath() {
+	fmt.Println("Config Path:" + constant.DEFAULT_CONF_P)
+	fmt.Println("Config Content:" + fmt.Sprintln(conf.Viper.AllSettings()))
 }
