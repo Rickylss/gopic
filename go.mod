@@ -6,7 +6,9 @@ require (
 	github.com/hirochachacha/go-smb2 v1.1.0
 	github.com/lithammer/dedent v1.1.0
 	github.com/qiniu/go-sdk/v7 v7.13.0
+	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/cobra v1.5.0
+	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.12.0
 	golang.org/x/exp v0.0.0-20220916125017-b168a2c6b86b
 )
@@ -23,7 +25,6 @@ require (
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.3.0 // indirect
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 // indirect
 	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4 // indirect

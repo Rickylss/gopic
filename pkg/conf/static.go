@@ -1,4 +1,4 @@
-package staic
+package conf
 
 import _ "embed"
 

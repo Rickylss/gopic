@@ -2,9 +2,8 @@ package conf
 
 import (
 	"fmt"
-	"path"
 
-	"github.com/OSTGO/gopic/pkg/utils"
+	"github.com/OSTGO/gopic/pkg/constant"
 	"github.com/spf13/viper"
 )
 
@@ -12,8 +11,7 @@ var Viper viper.Viper
 
 func init() {
 	Viper = *viper.New()
-	configPath := path.Join(utils.GetHomeDir(), ".gopic.json")
-	Viper.SetConfigFile(configPath)
+	Viper.SetConfigFile(constant.DEFAULT_CONF_P)
 	if err := Viper.ReadInConfig(); err != nil {
 		fmt.Println(err)
 	}
