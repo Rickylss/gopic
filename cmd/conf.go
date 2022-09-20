@@ -17,6 +17,7 @@ var confCmd = &cobra.Command{
 	Use:   "conf",
 	Short: "config env",
 	Long:  `config env`,
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(cmdIementaion.CmdConf())
 	},

@@ -18,6 +18,7 @@ var uploadCmd = &cobra.Command{
 	Use:   "upload",
 	Short: "upload pic list",
 	Long:  `upload pic list`,
+	Args:  cobra.ArbitraryArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		uo := uploadFlags.NewUploadOptions(cmd, args)
 		outURL := uo.CmdUpload()

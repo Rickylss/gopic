@@ -16,6 +16,7 @@ var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "init env",
 	Long:  `init env,please use root privilege`,
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(cmdIementaion.CmdInit())
 	},

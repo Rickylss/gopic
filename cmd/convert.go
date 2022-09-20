@@ -18,9 +18,10 @@ var convertCmd = &cobra.Command{
 	Use:   "convert",
 	Short: "convert pics",
 	Long:  `convert pics`,
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		co := covertFlags.NewConvertOptions()
-		err := co.CmdConvert(cmd, args)
+		co := covertFlags.NewConvertOptions(cmd, args)
+		err := co.CmdConvert()
 		if err != nil {
 			panic(err)
 		}

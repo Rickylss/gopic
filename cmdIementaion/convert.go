@@ -27,13 +27,13 @@ type ConvertOptions struct {
 	*ConvertFlags
 }
 
-func (cf *ConvertFlags) NewConvertOptions() *ConvertOptions {
+func (cf *ConvertFlags) NewConvertOptions(cmd *cobra.Command, args []string) *ConvertOptions {
 	return &ConvertOptions{
 		ConvertFlags: cf,
 	}
 }
 
-func (co *ConvertOptions) CmdConvert(cmd *cobra.Command, args []string) error {
+func (co *ConvertOptions) CmdConvert() error {
 	if co.CovertPath == "" {
 		co.CovertPath = "./"
 	}

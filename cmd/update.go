@@ -15,6 +15,7 @@ var updateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "update gopic",
 	Long:  `update from github`,
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("update called")
 	},
