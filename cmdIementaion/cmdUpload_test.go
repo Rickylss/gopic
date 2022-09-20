@@ -6,12 +6,17 @@ import (
 )
 
 func TestCmdUpload(t *testing.T) {
-	path := "../1.png"
-	storageList := []string{"qiniu", "github"}
+	uf := &UploadFlags{
+		Path:        "../1.png",
+		StorageList: []string{"qiniu", "github"},
+		AllStorage:  false,
+		NameReserve: false,
+		OutFormat:   "qiniu",
+	}
 	args := []string{"../2.png"}
-	allStorage := false
-	outFormat := "qiniu"
-	outs := CmdUpload(storageList, args, allStorage, false, path, outFormat)
+	uo := uf.NewUploadOptions(nil, args)
+
+	outs := uo.CmdUpload()
 	fmt.Println(outs)
 	fmt.Println("end")
 }

@@ -7,15 +7,11 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/OSTGO/gopic/cmdIementaion"
+	cmdi "github.com/OSTGO/gopic/cmdIementaion"
 	"github.com/spf13/cobra"
 )
 
-var path string
-var outFormat string
-var allStorage bool
-var storageList []string
-var nameReserve bool
+var uploadFlags cmdi.UploadFlags
 
 // uploadCmd represents the upload command
 var uploadCmd = &cobra.Command{
@@ -23,17 +19,18 @@ var uploadCmd = &cobra.Command{
 	Short: "upload pic list",
 	Long:  `upload pic list`,
 	Run: func(cmd *cobra.Command, args []string) {
-		outURL := cmdIementaion.CmdUpload(storageList, args, allStorage, nameReserve, path, outFormat)
+		uo := uploadFlags.NewUploadOptions(cmd, args)
+		outURL := uo.CmdUpload()
 		fmt.Print(outURL)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(uploadCmd)
-	uploadCmd.Flags().StringVarP(&path, "path", "p", "", "")
-	uploadCmd.Flags().BoolVarP(&allStorage, "all", "a", false, "")
-	uploadCmd.Flags().StringSliceVarP(&storageList, "storage", "s", nil, "")
-	uploadCmd.Flags().StringVarP(&outFormat, "format", "f", "", "")
-	uploadCmd.Flags().BoolVarP(&nameReserve, "name", "n", false, "")
+	uploadCmd.Flags().StringVarP(&uploadFlags.Path, "path", "p", "", "")
+	uploadCmd.Flags().BoolVarP(&uploadFlags.AllStorage, "all", "a", false, "")
+	uploadCmd.Flags().StringSliceVarP(&uploadFlags.StorageList, "storage", "s", nil, "")
+	uploadCmd.Flags().StringVarP(&uploadFlags.OutFormat, "format", "f", "", "")
+	uploadCmd.Flags().BoolVarP(&uploadFlags.NameReserve, "name", "n", false, "")
 	uploadCmd.MarkFlagRequired("pathList")
 }

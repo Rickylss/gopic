@@ -7,12 +7,11 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/OSTGO/gopic/cmdIementaion"
+	cmdi "github.com/OSTGO/gopic/cmdIementaion"
 	"github.com/spf13/cobra"
 )
 
-var recurse bool // 递归查找
-var covertPath, outDir string
+var covertFlags cmdi.ConvertFlags
 
 // convertCmd represents the convert command
 var convertCmd = &cobra.Command{
@@ -20,7 +19,8 @@ var convertCmd = &cobra.Command{
 	Short: "convert pics",
 	Long:  `convert pics`,
 	Run: func(cmd *cobra.Command, args []string) {
-		err := cmdIementaion.CmdConvert(covertPath, outDir, outFormat, allStorage, nameReserve, recurse, storageList)
+		co := covertFlags.NewConvertOptions()
+		err := co.CmdConvert(cmd, args)
 		if err != nil {
 			panic(err)
 		}
@@ -30,12 +30,12 @@ var convertCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(convertCmd)
-	convertCmd.Flags().StringVarP(&covertPath, "covertPath", "c", "./", "")
-	convertCmd.Flags().BoolVarP(&allStorage, "all", "a", false, "")
-	convertCmd.Flags().BoolVarP(&recurse, "recurse", "r", false, "")
-	convertCmd.Flags().StringSliceVarP(&storageList, "storage", "s", nil, "")
-	convertCmd.Flags().StringVarP(&outFormat, "format", "f", "", "")
-	convertCmd.Flags().StringVarP(&outDir, "dir", "d", "", "")
-	convertCmd.Flags().BoolVarP(&nameReserve, "name", "n", false, "")
+	convertCmd.Flags().StringVarP(&covertFlags.CovertPath, "covertPath", "c", "./", "")
+	convertCmd.Flags().BoolVarP(&covertFlags.AllStorage, "all", "a", false, "")
+	convertCmd.Flags().BoolVarP(&covertFlags.Recurse, "recurse", "r", false, "")
+	convertCmd.Flags().StringSliceVarP(&covertFlags.StorageList, "storage", "s", nil, "")
+	convertCmd.Flags().StringVarP(&covertFlags.OutFormat, "format", "f", "", "")
+	convertCmd.Flags().StringVarP(&covertFlags.OutDir, "dir", "d", "", "")
+	convertCmd.Flags().BoolVarP(&covertFlags.NameReserve, "name", "n", false, "")
 	convertCmd.MarkFlagRequired("dir")
 }

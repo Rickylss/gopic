@@ -5,38 +5,59 @@ import (
 	"sync"
 
 	"github.com/OSTGO/gopic/utils"
+	"github.com/spf13/cobra"
 
 	_ "github.com/OSTGO/gopic/plugin"
 )
 
-func CmdUpload(storageList, args []string, allStorage, nameReserve bool, path, outFormat string) string {
-	if path == "" && args == nil {
+type UploadFlags struct {
+	Path        string
+	OutFormat   string
+	AllStorage  bool
+	StorageList []string
+	NameReserve bool
+}
+
+type UploadOptions struct {
+	*UploadFlags
+	Args []string
+}
+
+func (uf *UploadFlags) NewUploadOptions(cmd *cobra.Command, args []string) *UploadOptions {
+	return &UploadOptions{
+		UploadFlags: uf,
+		Args:        args,
+	}
+}
+
+func (uo *UploadOptions) CmdUpload() string {
+	if uo.Path == "" && uo.Args == nil {
 		return "path is nil"
 	}
 	pathList := make([]string, 0, 0)
-	if args != nil {
-		pathList = append(args, path)
+	if uo.Args != nil {
+		pathList = append(uo.Args, uo.Path)
 	} else {
-		pathList = []string{path}
+		pathList = []string{uo.Path}
 	}
-	if allStorage {
-		storageList = utils.GetStringUploadMapKey(utils.StroageMap)
+	if uo.AllStorage {
+		uo.StorageList = utils.GetStringUploadMapKey(utils.StroageMap)
 	}
-	if storageList == nil {
+	if uo.StorageList == nil {
 		return "not chose storage"
 	}
-	outMap, errMap := NewUpload(storageList, pathList, nameReserve)
+	outMap, errMap := NewUpload(uo.StorageList, pathList, uo.NameReserve)
 	if len(errMap) != 0 {
 		for k, v := range errMap {
 			fmt.Printf("%v:%v\n", k, v)
 		}
 		return ""
 	}
-	if outFormat == "" {
-		outFormat = storageList[0]
+	if uo.OutFormat == "" {
+		uo.OutFormat = uo.StorageList[0]
 	}
 	urlList := ""
-	for _, v := range outMap[outFormat] {
+	for _, v := range outMap[uo.OutFormat] {
 		urlList = urlList + v + "\n"
 	}
 	return urlList

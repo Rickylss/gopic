@@ -10,25 +10,46 @@ import (
 	"strings"
 
 	"github.com/OSTGO/gopic/utils"
+	"github.com/spf13/cobra"
 )
 
-func CmdConvert(covertPath, outDir, outFormat string, allStorage, nameReserve, recurse bool, storageList []string) error {
-	if covertPath == "" {
-		covertPath = "./"
+type ConvertFlags struct {
+	CovertPath  string
+	AllStorage  bool
+	Recurse     bool
+	StorageList []string
+	OutFormat   string
+	OutDir      string
+	NameReserve bool
+}
+
+type ConvertOptions struct {
+	*ConvertFlags
+}
+
+func (cf *ConvertFlags) NewConvertOptions() *ConvertOptions {
+	return &ConvertOptions{
+		ConvertFlags: cf,
 	}
-	if outDir == "" {
+}
+
+func (co *ConvertOptions) CmdConvert(cmd *cobra.Command, args []string) error {
+	if co.CovertPath == "" {
+		co.CovertPath = "./"
+	}
+	if co.OutDir == "" {
 		return errors.New("not set outDir")
 	}
-	if allStorage {
-		storageList = utils.GetStringUploadMapKey(utils.StroageMap)
+	if co.AllStorage {
+		co.StorageList = utils.GetStringUploadMapKey(utils.StroageMap)
 	}
-	if storageList == nil || len(storageList) == 0 {
+	if co.StorageList == nil || len(co.StorageList) == 0 {
 		return errors.New("not chose storage")
 	}
-	if outFormat == "" {
-		outFormat = storageList[0]
+	if co.OutFormat == "" {
+		co.OutFormat = co.StorageList[0]
 	}
-	err := convert(covertPath, outDir, outFormat, storageList, nameReserve)
+	err := convert(co.CovertPath, co.OutDir, co.OutFormat, co.StorageList, co.NameReserve)
 	return err
 }
 
