@@ -20,7 +20,7 @@ rule unit
 build utest: unit
 
 rule compile
-  command = go mod tidy && $GOFLAGS go build $LDFLAGS $GCFLAGS -a -o $OUTPUT/$out $in && upx -9 $OUTPUT/$out && echo "$out build done."
+  command = go mod tidy && $GOFLAGS go build $LDFLAGS $GCFLAGS -a -o $OUTPUT/$out $in && echo "$out build done." #&& upx -9 $OUTPUT/$out 
   description = compile %in
 
 build gopic: compile .
@@ -47,6 +47,6 @@ build rpm-amd64: rpm-build gopic-linux-amd64
 build rpm-arm64: rpm-build gopic-linux-arm64
   TARGET = armv8l-linux
 
-build all: phony gopic-linux-amd64 gopic-linux-arm64 gopic-mac-amd64 gopic.exe lintoutput
+build all: phony gopic-linux-amd64 gopic-linux-arm64 gopic-mac-amd64 gopic.exe
 
 default all
