@@ -2,10 +2,11 @@ package cmdIementaion
 
 import (
 	"fmt"
-	"path"
 
-	"github.com/OSTGO/gopic/conf"
-	"github.com/OSTGO/gopic/utils"
+	"github.com/OSTGO/gopic/pkg/conf"
+	"github.com/OSTGO/gopic/pkg/constant"
+	"github.com/OSTGO/gopic/pkg/utils"
+	"golang.org/x/exp/maps"
 )
 
 func CmdConf() string {
@@ -13,11 +14,11 @@ func CmdConf() string {
 }
 
 func showAllPluginList() string {
-	return fmt.Sprintln("Supported Plugins:", utils.GetStringStringMapKey(utils.StroageHelp))
+	return fmt.Sprintln("Supported Plugins:", maps.Keys(utils.StroageHelp))
 }
 
 func showActivePluginList() string {
-	return fmt.Sprintln("Actived Plugins: ", utils.GetStringUploadMapKey(utils.StroageMap))
+	return fmt.Sprintln("Actived Plugins: ", maps.Keys(utils.StroageMap))
 }
 
 func showEveryPluginHelp() string {
@@ -25,5 +26,5 @@ func showEveryPluginHelp() string {
 }
 
 func showConfigAndPath() string {
-	return "Config Path:" + fmt.Sprintln(path.Join(utils.GetHomeDir(), ".gopic.json")) + "Config Content:" + fmt.Sprintln(conf.Viper.AllSettings())
+	return "Config Path:" + constant.DEFAULT_CONF_P + "Config Content:" + fmt.Sprintln(conf.Viper.AllSettings())
 }

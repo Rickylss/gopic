@@ -5,8 +5,8 @@ import (
 	"os"
 	"path"
 
-	"github.com/OSTGO/gopic/conf"
-	"github.com/OSTGO/gopic/utils"
+	"github.com/OSTGO/gopic/pkg/conf"
+	"github.com/OSTGO/gopic/pkg/utils"
 	"github.com/hirochachacha/go-smb2"
 )
 

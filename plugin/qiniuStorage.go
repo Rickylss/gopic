@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"context"
 
-	"github.com/OSTGO/gopic/conf"
-	"github.com/OSTGO/gopic/utils"
+	"github.com/OSTGO/gopic/pkg/conf"
+	"github.com/OSTGO/gopic/pkg/utils"
 	"github.com/qiniu/go-sdk/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/storage"
 )

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/OSTGO/gopic/utils"
+	"github.com/OSTGO/gopic/pkg/utils"
 	"github.com/spf13/cobra"
 
 	_ "github.com/OSTGO/gopic/plugin"

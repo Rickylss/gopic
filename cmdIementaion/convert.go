@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/OSTGO/gopic/utils"
+	"github.com/OSTGO/gopic/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
