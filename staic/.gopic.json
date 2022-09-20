@@ -1,4 +1,8 @@
 {
+  "local": {
+    "active": true,
+    "path": "/home/rickylss/gopictest"
+  },
   "qiniu": {
     "active": true,
     "accessKey": "yourAccessKey",

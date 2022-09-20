@@ -131,7 +131,7 @@ func (b *Image) processData() (err error) {
 func (b *Image) setOthers(nameReserve bool) (err error) {
 	defer func() {
 		if e := recover(); e != nil {
-			err = errors.New(fmt.Sprintf("%v", e))
+			err = fmt.Errorf("%v", e)
 		}
 	}()
 	b.FolderName = getCurrentYear()
